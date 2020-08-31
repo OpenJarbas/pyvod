@@ -1,6 +1,13 @@
 from pyvod import Collection
 from os.path import dirname, join
 
+
+MyTVToGo = Collection(
+    name="MyTVToGo",
+    logo=join(dirname(__file__), "res", "logo", "MyTVToGo.png"),
+    db_path=join(dirname(__file__), "res", "mytvtogo.jsondb"))
+
+
 Cinemocracy = Collection(
     name="Cinemocracy",
     logo=join(dirname(__file__), "res", "logo", "cinemocracy.jpg"),
