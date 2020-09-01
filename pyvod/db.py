@@ -22,6 +22,8 @@ class Stream:
 class Movie:
     def __init__(self, **kwargs):
         self.data = kwargs
+        if "title" not in self.data and "name" in self.data:
+            self.data["title"] = self.data.pop("name")
         self.name = str(self.data["title"]).strip()
         self._streams = self.data.get("streams") or [self.data["stream"]]
 
@@ -83,7 +85,9 @@ def add_movie(data, db_path, replace=True, normalize=True):
     if isinstance(data, Movie):
         data = data.as_json()
 
-    assert "title" in data
+    title = data.get("title") or data.get("name")
+    assert title is not None
+    data["title"] = title
 
     # normalization
     if normalize:
@@ -132,8 +136,9 @@ def remove_movie(data, db_path, normalize=True):
     if isinstance(data, Movie):
         data = data.as_json()
 
-    assert "title" in data
-
+    title = data.get("title") or data.get("name")
+    assert title is not None
+    data["title"] = title
 
     # normalization
     if normalize:

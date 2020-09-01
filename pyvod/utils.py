@@ -26,7 +26,7 @@ def check_stream(url, timeout=5, verbose=False):
             if verbose:
                 print("stream DEAD:", url, s)
             return StreamStatus.DEAD
-        if s == 401:
+        elif str(s).startswith("4"):
             if verbose:
                 print("stream FORBIDDEN:", url, s)
             return StreamStatus.FORBIDDEN
