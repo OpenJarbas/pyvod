@@ -1,9 +1,6 @@
 bs4
 requests
 json_database
-bs4
-requests
-json_database
 youtube-dl
 pafy
 m3u8
