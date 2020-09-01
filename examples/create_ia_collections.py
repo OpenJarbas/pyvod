@@ -89,8 +89,7 @@ collections = [
     "nuraypictures",
     "movie_trailers",
     "sinema-trailers",
-    "stock_footage",
-"moviesandfilms",
+    "stock_footage"
 ]
 
 for collection_name in collections:
