@@ -200,21 +200,156 @@ data = {
 }
 MyTV.add_movie(data)
 
-MyTV.dump_m3u8("mytvtogoVOD.m3u8")
 
-
-# TODO drama page https://mytvtogo.net/category/vod-movies/vod-movies-drama/
 data = {
-    "title": "",
-    "year": 1961,
-    "description": "",
-    "stream": "",
-    "stars": [""],
-    "director": "",
+    "title": "Beyond the Law",
+    "year": 1993,
+    "description": "An undercover cop joins a murderous, arms-dealing biker gang to try to put them behind bars.",
+    "stream": "https://cdn.gideo.video/33925937-a7bb-4138-a9b9-06365c2d8a48/59bb204b76663cacca46b8624fa21c7fa7f104f5/529914908b730c5b9069418cc4bf5e696cd120b3/playlist.m3u8",
+    "stars": ["Charlie Sheen", "Linda Fiorentino", "Michael Madsen"],
+    "director": "Larry Ferguson",
     "tags": ["Drama"],
-    "logo": ".png",
-    "identifier": "mytvtogo",
+    "logo": "MyTVToGoBEYOND_THE_LAW.png",
+    "identifier": "mytvtogoBEYOND_THE_LAW",
     "collection": ["MyTVToGo"]
 }
-#MyTV.add_movie(data)
+MyTV.add_movie(data)
 
+data = {
+    "title": "Savage Lagoon",
+    # https://www.imdb.com/title/tt0204172/?ref_=rvi_tt
+    "year": 1999,
+    "description": "It is late 1940’s when the beautiful countess of Rudlov disappears. The legend blames the monster, the people blame the lagoon. Nearly 50 years later, the spirited Illona Rudlov, is a struggling ballerina living in New York. Illona decides to go to Bohemia to reclaim her ancestor’s castle.",
+    "stream": "https://cdn.gideo.video/ae08e430-0b9b-4793-8fd3-72a3fc3120f2/04393ae85945f82e948e6b2c700c343de797e09a/1618db1fad6837a22249d6ec61b530e5c07c4334/playlist.m3u8",
+    "stars": [" Jacqueline Freid", "Paul Hawkins", "Gary Michaels"],
+    "director": "MarieAnna Dvorak",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoSAVAGE_LAGOON.png",
+    "identifier": "mytvtogoSAVAGE_LAGOON",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "Tammy And The Doctor",
+    "year": 1963,
+    "description": "When Mrs. Call’s heart condition acts up, Tammy tags along in the trip to Los Angeles when the old lady is getting her surgery. Since there are no guest quarters in the hospital, Tammy gets a job in the hospital as a nurse’s assistant. Peter Fonda plays Tammy’s love interest, Dr. Mark Cheswick, while Adam West has a small part as Dr. Eric Hassler. This is the final entry in the canonic film series, and Sandra Dee’s last appearance as Tammy.",
+    "stream": "https://cdn.gideo.video/e8b01d58-bb84-42bb-b0f9-fdc548facf29/hls/v1/playlist.m3u8",
+    "stars": ["Sandra Dee", "Peter Fonda", "Macdonald Carey"],
+    "director": "Harry Keller",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoTAMMY_AND_THE_DOCTOR.png",
+    "identifier": "mytvtogoTAMMY_AND_THE_DOCTOR",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "Royal Wedding",
+    "year": 1951,
+    "description": "A brother and sister dance act encounter challenges and romance when booked in London during the Royal Wedding.",
+    "stream": "https://cdn.gideo.video/e8b01d58-bb84-42bb-b0f9-fdc548facf29/hls/v1/playlist.m3u8",
+    "stars": ["Fred Astaire", "Jane Powell", "Peter Lawford"],
+    "director": "Stanley Donen",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoROYAL_WEDDING.png",
+    "identifier": "mytvtogoROYAL_WEDDING",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "Vengeance Valley",
+    "year": 1951,
+    "description": "The sons of a Colorado cattle baron, one biological and the other adopted, resent one another and fight for control of their father’s cattle empire.",
+    "stream": "https://cdn.gideo.video/980f110e-fedd-4792-8861-cc9648935422/b97d288c241a463852abe19148d2ec40379e7a57/aface29accb09eba158bf178b39d58dae5b7dee5/playlist.m3u8",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoVENGEANCE_VALLEY.png",
+    "identifier": "mytvtogoVENGEANCE_VALLEY",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "Airborne",
+    "year": 1998,
+    "description": "A gang of thieves break into a top secret government research centre and steal a deadly virus. Mach 1, a top secret special operations team, is called in to recover it. The team, lead by Commander Bill McNeil (Steve Guttenberg), boards the thieves plane in mid-flight and recovers the virus. When two members of the team are subsequently murdered, McNeil suspects that the thieves might have inside help. In an attempt to track down who was responsible, the team steals the virus in a hope that the thieves will come after them.",
+    "stream": "https://cdn.gideo.video/ff87897f-5035-45af-af25-b93dd6d4233c/0b75933e73b63dc09fc031b6b887ef7054ae3292/4603707b50cf4fed887062e510ed11566e1b41fc/playlist.m3u8",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoAIRBORNE.png",
+    "identifier": "mytvtogoAIRBORNE",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "His Girl Friday",
+    "year": 1940,
+    "description": "When hard-charging New York newspaper editor Walter Burns (Cary Grant) discovers that his ex-wife, investigative reporter Hildy Johnson (Rosalind Russell), has gotten engaged to milquetoast insurance agent Bruce Baldwin (Ralph Bellamy), he unsuccessfully tries to lure her away from tame domestic life with a story about the impending execution of convicted murderer Earl Williams. But when Hildy discovers Williams may be innocent, her reporter instincts take over.",
+    "stream": "https://cdn.gideo.video/ea874614-3877-49cd-9816-ef67452a96d8/4c08c6ec96aabe2d08335de16d616ec72dc63cd4/d6cadb50f0c9878d937dd729f9368672d4084448/playlist.m3u8",
+    "stars": ["Cary Grant", "Rosalind Russell", "Ralph Bellamy"],
+    "director": "Howard Hawks",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoHIS_GIRL_FRIDAY.png",
+    "identifier": "mytvtogoHIS_GIRL_FRIDAY",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "A Star Is Born",
+    "year": 1937,
+    "description": "A young woman comes to Hollywood with dreams of stardom, but achieves them only with the help of an alcoholic leading man whose best days are behind him.",
+    "stream": "https://cdn.gideo.video/6d84f316-093b-47d6-a7c0-0639d8197aec/4a4b72a606439ec9848c579689545db3c80e65b4/7683d81cc47a201c504a96bbeb068ba5b183e558/playlist.m3u8",
+    "stars": ["Janet Gaynor", "Fredric March", "Adolphe Menjou"],
+    "director": "William A. Wellman",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoA_STAR_IS_BORN.png",
+    "identifier": "mytvtogoA_STAR_IS_BORN",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "WiseGirls",
+    "year": 2002,
+    "description": "A new waitress working at an Italian restaurant in New York City finds herself entangled in a mob-run underworld of drug dealing and murder.",
+    "stream": "https://cdn.gideo.video/b554c11a-15c6-49ed-a05f-98fb2fc6916e/hls/v1/playlist.m3u8",
+    "stars": ["Mira Sorvino", "Mariah Carey", "Melora Walter"],
+    "director": "David Anspaugh",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoWISE_GIRLS.png",
+    "identifier": "mytvtogoWISE_GIRLS",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "The Adventures of Tartu",
+    "year": 1943,
+    "description": "Stevenson, a British soldier fluent in Rumanian and German, goes undercover to sabotage a German poison-gas factory. He turns himself into Jan Tartu, a member of the Rumanian Iron Guard. But when his contacts are destroyed, his cover may get him killed by the very underground he needs to succeed.",
+    "stream": "https://cdn.gideo.video/443e4ad2-816a-400a-ab10-33151adc97fd/hls/v1/playlist.m3u8",
+    "stars": ["Robert Donat", "Valerie Hobson", "Walter Rilla"],
+    "director": "Harold S. Bucquet",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoTHE_ADVENTURES_OF_TARTU.png",
+    "identifier": "mytvtogoTHE_ADVENTURES_OF_TARTU",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+data = {
+    "title": "The Last Man on Earth",
+    "year": 1964,
+    "description": "When a plague devastated life on Earth, the population died or became a sort of zombie living in the dark. Dr. Robert Morgan is the unique healthy survivor on the planet, having a routine life for his own survival: he kills the night creatures along the day and maintains the safety of his house, to be protected along the night. He misses his beloved wife and daughter, consumed by the outbreak, and he fights against his loneliness to maintain mentally sane. When Dr. Morgan finds the contaminated Ruth Collins, he uses his blood to heal her and he becomes the last hope on Earth to help the other contaminated survivors. But the order of this new society is scary",
+    "stream": "https://cdn.gideo.video/9f011952-e092-45ea-8701-9fe8716c3818/hls/v1/playlist.m3u8",
+    "stars": ["Vincent Price", "Franca Bettoia", "Emma Danieli"],
+    "director": "Ubaldo Ragona",
+    "tags": ["Drama"],
+    "logo": "MyTVToGoTHE_LAST_MAN_ON_EARTH.png",
+    "identifier": "mytvtogoTHE_LAST_MAN_ON_EARTH",
+    "collection": ["MyTVToGo"]
+}
+MyTV.add_movie(data)
+
+MyTV.dump_m3u8("mytvtogoVOD.m3u8")
