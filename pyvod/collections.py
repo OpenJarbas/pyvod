@@ -56,11 +56,6 @@ SilentHallOfFame = Collection(
     logo=join(dirname(__file__), "res", "logo", "silenthalloffame.jpg"),
     db_path=join(dirname(__file__), "res", "silenthalloffame.jsondb"))
 
-MoviesAndFilms = Collection(
-    name="movies-and-films",
-    db_path=join(dirname(__file__), "res", "moviesandfilms.jsondb"))
-
-
 SinemaTrailers = Collection(
     name="sinema-trailers",
     db_path=join(dirname(__file__), "res", "sinema-trailers.jsondb"))
