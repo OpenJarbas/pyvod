@@ -13,7 +13,8 @@ data = {
     "Director": "Joseph Green",
     "tags": ["Horror"],
     "logo": "BRAIN.png",
-    "identifier": "mytvtogoBRAIN"
+    "identifier": "mytvtogoBRAIN",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -26,7 +27,8 @@ data = {
     "Director": "Harold P. Warren",
     "tags": ["Horror"],
     "logo": "MANOS.png",
-    "identifier": "mytvtogoMANOS"
+    "identifier": "mytvtogoMANOS",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -39,7 +41,8 @@ data = {
     "Director": "James Cummins",
     "tags": ["Horror"],
     "logo": "BONEYARD.png",
-    "identifier": "mytvtogoBONEYARD"
+    "identifier": "mytvtogoBONEYARD",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -52,7 +55,8 @@ data = {
     "Director": "Paul Landres",
     "tags": ["Horror"],
     "logo": "DRACULA.png",
-    "identifier": "mytvtogoDRACULA"
+    "identifier": "mytvtogoDRACULA",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -65,7 +69,8 @@ data = {
     "Director": "George A. Romero",
     "tags": ["Horror"],
     "logo": "DEAD.png",
-    "identifier": "mytvtogoDEAD"
+    "identifier": "mytvtogoDEAD",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -78,7 +83,8 @@ data = {
     "Director": "Charles Martin",
     "tags": [],
     "logo": "DEARSECRETARY.png",
-    "identifier": "mytvtogoDEARSECRETARY"
+    "identifier": "mytvtogoDEARSECRETARY",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -91,7 +97,8 @@ data = {
     "director": "Kevin Connor",
     "tags": ["Horror"],
     "logo": "MOTELHELL.png",
-    "identifier": "mytvtogoMOTELHELL"
+    "identifier": "mytvtogoMOTELHELL",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -104,7 +111,8 @@ data = {
     "director": "William Castle",
     "tags": ["Horror"],
     "logo": "HOUSEHAUNTEDHILL.png",
-    "identifier": "mytvtogoHOUSEHAUNTEDHILL"
+    "identifier": "mytvtogoHOUSEHAUNTEDHILL",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -117,7 +125,8 @@ data = {
     "director": "Roger Corman",
     "tags": ["Horror"],
     "logo": "SHOPHORRORS.png",
-    "identifier": "mytvtogoSHOPHORRORS"
+    "identifier": "mytvtogoSHOPHORRORS",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -130,7 +139,8 @@ data = {
     "Director": "Tony Maylam",
     "tags": ["Horror"],
     "logo": "BURNING.png",
-    "identifier": "mytvtogoBURNING"
+    "identifier": "mytvtogoBURNING",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -143,7 +153,8 @@ data = {
     "Director": "George Pal",
     "tags": ["Horror", "SciFi"],
     "logo": "TIMEMACHINE.png",
-    "identifier": "mytvtogoTIMEMACHINE"
+    "identifier": "mytvtogoTIMEMACHINE",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -156,7 +167,8 @@ data = {
     "director": "Sam Peckinpah",
     "tags": ["Westerns"],
     "logo": "THE_DEADLY_COMPANIONS.png",
-    "identifier": "mytvtogoTHE_DEADLY_COMPANIONS"
+    "identifier": "mytvtogoTHE_DEADLY_COMPANIONS",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -169,7 +181,8 @@ data = {
     "director": "Andrew V. McLaglen",
     "tags": ["Westerns"],
     "logo": "MC_LINTOCK.png",
-    "identifier": "mytvtogoMC_LINTOCK"
+    "identifier": "mytvtogoMC_LINTOCK",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -182,7 +195,8 @@ data = {
     "director": "James Edward Grant",
     "tags": ["Westerns"],
     "logo": "ANGEL_AND_THE_BADMAN.png",
-    "identifier": "mytvtogoANGEL_AND_THE_BADMAN"
+    "identifier": "mytvtogoANGEL_AND_THE_BADMAN",
+    "collection": ["MyTVToGo"]
 }
 MyTV.add_movie(data)
 
@@ -199,7 +213,8 @@ data = {
     "director": "",
     "tags": ["Drama"],
     "logo": ".png",
-    "identifier": "mytvtogo"
+    "identifier": "mytvtogo",
+    "collection": ["MyTVToGo"]
 }
 #MyTV.add_movie(data)
 

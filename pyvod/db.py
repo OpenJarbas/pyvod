@@ -29,8 +29,7 @@ class Movie:
 
     @property
     def identifier(self):
-        return self.data.get("identifier",
-                                     self.name.replace(" ", "_").lower())
+        return self.data.get("identifier", self.name.replace(" ", "_").lower())
 
     @staticmethod
     def from_json(data):
@@ -65,10 +64,10 @@ class Movie:
         return vid.streams[0].url  # stream fallback
 
     def __str__(self):
-        return "movie:" + self.name
+        return "-".join(self.data["collection"]) + ":" + self.name
 
     def __repr__(self):
-        return "movie:" + self.name
+        return "-".join(self.data["collection"]) + ":" + self.name
 
 
 def total_movies(db_path):

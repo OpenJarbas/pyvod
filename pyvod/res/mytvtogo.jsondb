@@ -15,7 +15,10 @@
                 "horror"
             ],
             "logo": "brain.png",
-            "identifier": "mytvtogobrain"
+            "identifier": "mytvtogobrain",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "manos: the hands of fate",
@@ -32,7 +35,10 @@
                 "horror"
             ],
             "logo": "manos.png",
-            "identifier": "mytvtogomanos"
+            "identifier": "mytvtogomanos",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "the boneyard",
@@ -49,7 +55,10 @@
                 "horror"
             ],
             "logo": "boneyard.png",
-            "identifier": "mytvtogoboneyard"
+            "identifier": "mytvtogoboneyard",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "the return of dracula",
@@ -66,7 +75,10 @@
                 "horror"
             ],
             "logo": "dracula.png",
-            "identifier": "mytvtogodracula"
+            "identifier": "mytvtogodracula",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "night of the living dead",
@@ -83,7 +95,10 @@
                 "horror"
             ],
             "logo": "dead.png",
-            "identifier": "mytvtogodead"
+            "identifier": "mytvtogodead",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "my dear secretary",
@@ -98,7 +113,10 @@
             "Director": "charles martin",
             "tags": [],
             "logo": "dearsecretary.png",
-            "identifier": "mytvtogodearsecretary"
+            "identifier": "mytvtogodearsecretary",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "motel hell",
@@ -115,7 +133,10 @@
                 "horror"
             ],
             "logo": "motelhell.png",
-            "identifier": "mytvtogomotelhell"
+            "identifier": "mytvtogomotelhell",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "house on haunted hill",
@@ -132,7 +153,10 @@
                 "horror"
             ],
             "logo": "househauntedhill.png",
-            "identifier": "mytvtogohousehauntedhill"
+            "identifier": "mytvtogohousehauntedhill",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "the little shop of horrors",
@@ -149,7 +173,10 @@
                 "horror"
             ],
             "logo": "shophorrors.png",
-            "identifier": "mytvtogoshophorrors"
+            "identifier": "mytvtogoshophorrors",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "the burning",
@@ -166,7 +193,10 @@
                 "horror"
             ],
             "logo": "burning.png",
-            "identifier": "mytvtogoburning"
+            "identifier": "mytvtogoburning",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "the time machine",
@@ -184,7 +214,10 @@
                 "scifi"
             ],
             "logo": "timemachine.png",
-            "identifier": "mytvtogotimemachine"
+            "identifier": "mytvtogotimemachine",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "the deadly companions",
@@ -201,7 +234,10 @@
                 "westerns"
             ],
             "logo": "the_deadly_companions.png",
-            "identifier": "mytvtogothe_deadly_companions"
+            "identifier": "mytvtogothe_deadly_companions",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "mclintock!",
@@ -218,7 +254,10 @@
                 "westerns"
             ],
             "logo": "mc_lintock.png",
-            "identifier": "mytvtogomc_lintock"
+            "identifier": "mytvtogomc_lintock",
+            "collection": [
+                "mytvtogo"
+            ]
         },
         {
             "title": "angel and the badman",
@@ -235,7 +274,10 @@
                 "westerns"
             ],
             "logo": "angel_and_the_badman.png",
-            "identifier": "mytvtogoangel_and_the_badman"
+            "identifier": "mytvtogoangel_and_the_badman",
+            "collection": [
+                "mytvtogo"
+            ]
         }
     ]
 }
