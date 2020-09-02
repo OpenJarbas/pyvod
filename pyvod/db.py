@@ -1,5 +1,6 @@
 from json_database import JsonDatabase
 import pafy
+import vimeo_dl as vimeo
 from pyvod.utils import check_stream, StreamStatus
 
 
@@ -46,11 +47,18 @@ class Movie:
             if not url:
                 continue
 
-            if "www.youtube.com" in url:
+            if "youtube" in url or "youtu.be" in url:
                 try:
                     url = self.get_youtube_stream(url)
                 except:
                     print("youtube-dl failed, try updating it")
+                    continue
+            elif "vimeo." in url :
+                try:
+                    url = self.get_vimeo_stream(url)
+                except:
+                    print("youtube-dl failed, try updating it")
+                    print(url)
                     continue
             streams.append(Stream(url))
         return streams
@@ -58,7 +66,15 @@ class Movie:
     @staticmethod
     def get_youtube_stream(url):
         vid = pafy.new(url)
-        stream = vid.getbestvideo()
+        stream = vid.getbest()
+        if stream:
+            return stream.url
+        return vid.streams[0].url  # stream fallback
+
+    @staticmethod
+    def get_vimeo_stream(url):
+        vid = vimeo.new(url)
+        stream = vid.getbest()
         if stream:
             return stream.url
         return vid.streams[0].url  # stream fallback
@@ -80,7 +96,7 @@ def print_movies(db_path):
         db.print()
 
 
-def add_movie(data, db_path, replace=True, normalize=True):
+def add_movie(data, db_path, replace=True, normalize=False):
     if isinstance(data, Movie):
         data = data.as_json()
 
@@ -131,7 +147,7 @@ def update_movie(data, db_path):
     add_movie(data, db_path, False)
 
 
-def remove_movie(data, db_path, normalize=True):
+def remove_movie(data, db_path, normalize=False):
     if isinstance(data, Movie):
         data = data.as_json()
 
@@ -168,3 +184,4 @@ def get_movies(db_path):
             if not ch.get("streams") and not ch.get("stream"):
                 continue
             yield Movie.from_json(ch)
+
