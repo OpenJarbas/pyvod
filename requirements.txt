@@ -2,6 +2,3 @@ bs4
 requests
 json_database
 youtube-dl
-vimeo_dl
-pafy
-m3u8

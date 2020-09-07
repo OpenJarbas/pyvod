@@ -1,7 +1,9 @@
 import requests
 from requests.exceptions import Timeout
-import m3u8  # TODO this fails in some cases, need a better parser
 from enum import IntEnum
+import youtube_dl
+from tempfile import gettempdir
+from os.path import join
 
 
 class StreamStatus(IntEnum):
@@ -45,42 +47,104 @@ def check_stream(url, timeout=5, verbose=False):
     return StreamStatus.UNKNOWN
 
 
-def parse_m3u(m3, verify=False, verbose=False):
-    movies = {}
+def parse_m3u8(m3, verify=False, verbose=False):
+    if m3.startswith("http"):
+        content = requests.get(m3).content
+        m3 = join(gettempdir(), "pyvod.m3u8")
+        with open(m3, "wb") as f:
+            f.write(content)
+    with open(m3) as f:
+        m3ustr = f.read().split("\n")
+        m3ustr = [l for l in m3ustr if l.strip()]
 
-    m3u8_obj = m3u8.load(m3)
-    for movie in m3u8_obj.segments:
+    movies = []
+    for idx, line in enumerate(m3ustr):
+        if not line.strip():
+            continue
+        next_line = m3ustr[idx + 1] if idx + 1 < len(m3ustr) else None
+        if not next_line:
+            break
+        if line.startswith("#EXTINF:"):
+            data = {
+                "stream": next_line
+            }
+            fields, data["name"] = line.replace("#EXTINF:", "").split(
+                ",")
+
+            fields = fields.split("=")
+            k, val = None, None
+            for idx, entry in enumerate(fields):
+                if idx == 0:
+                    if len(entry.split(" ")) == 1:
+                        data["duration"] = entry
+                    else:
+                        data["duration"], k = entry.split(" ")
+                    data["duration"] = float(data["duration"])
+                else:
+                    _ = entry.split(" ")
+                    new_k = _[-1]
+                    val = " ".join(_[:-1])
+
+                    if val.startswith("\""):
+                        val = val[1:].strip()
+                    if val.endswith("\""):
+                        val = val[:-1].strip()
+
+                    if k and val:
+                        data[k] = val
+                        k, val = new_k, None
+            if "identifier" not in data:
+                data['identifier'] = data["name"].lower().strip().replace(" ", "_")
+            movies.append(data)
+
+    entries = {}
+    for movie in movies:
+        name = movie["name"]
+        entries[movie['identifier']] = movie
 
         # verify is url is dead or alive
         if verify:
             # NOTE might be temporarily down but still valid
             # Either way seems to be a bad stream, very slow of server side
             # implementation errors
+            stream = movie["stream"]
             if verbose:
-                print("Checking movie stream:", movie.title, movie.uri)
-            status = check_stream(movie.uri, verbose=verbose)
+                print("Checking stream:", name, stream)
+            status = check_stream(stream, verbose=verbose)
             if not status == StreamStatus.OK:
                 continue
 
-        norm_title = movie.title.replace(" ", " ").strip()
+    return entries
 
-        if norm_title.lower() in movies:
-            # add alternate streams to existing entry
-            movies[norm_title.lower()]["streams"].append(movie.uri)
-            movies[norm_title.lower()]["aliases"].append(norm_title)
+
+def ydl(url, verbose=False):
+    ydl_opts = {
+        "no_color": True,
+        'quiet': not verbose
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        result = ydl.extract_info(url,
+                                  download=False
+                                  # We just want to extract the info
+                                  )
+
+        if 'entries' in result:
+            # Can be a playlist or a list of videos
+            video = result['entries'][0]
         else:
-            movies[norm_title.lower()] = {
-                "streams": [movie.uri],
-                "name": norm_title,
-                "aliases": [norm_title]
-            }
+            # Just a video
+            video = result
 
-    for ch in movies:
-        # TODO retrieve logo + tags + country automatically somehow
-        # remove duplicate entries from fields
-        for k in movies[ch]:
-            if isinstance(movies[ch][k], list):
-                movies[ch][k] = list(set(movies[ch][k]))
+        return video['url']
 
-    return movies
+
+def url2stream(url):
+    try:
+        stream = ydl(url)
+        if stream:
+            url = stream
+    except:
+        # specific implementations can be added here
+        pass
+    return url
 
