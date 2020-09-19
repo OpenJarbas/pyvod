@@ -68,10 +68,11 @@ def parse_m3u8(m3, verify=False, verbose=False):
             data = {
                 "stream": next_line
             }
-            fields, data["name"] = line.replace("#EXTINF:", "").split(
-                ",")
+            sections = line.replace("#EXTINF:", "").split(",")
+            fields = sections[0].split("=")
+            data["name"] = sections[1]
+            data["aliases"] = sections[1:]
 
-            fields = fields.split("=")
             k, val = None, None
             for idx, entry in enumerate(fields):
                 if idx == 0:

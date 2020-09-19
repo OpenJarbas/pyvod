@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='py_VOD',
-    version='0.3',
+    version='0.3.1',
     packages=['pyvod'],
     url='https://github.com/OpenJarbas/pyvod/',
     license='Apache',

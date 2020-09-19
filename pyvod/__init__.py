@@ -83,20 +83,23 @@ class Collection:
         # #EXT-X-PLAYLIST-TYPE: 	VOD or EVENT
         # #EXT-X-MEDIA: 	NAME="English", TYPE=AUDIO, GROUP-ID="audio-stereo-64", LANGUAGE="en", DEFAULT=YES, AUTOSELECT=YES, URI="english.m3u8"
         for ch in self.entries:
-            group = self.name
+            try:
+                group = self.name
 
-            total = len(ch.streams)
-            for idx, stream in enumerate(ch.streams):
-                stream = str(ch.streams[0])
-                if stream == "None":
-                    continue
-                entry = entry_template.format(group=group,
-                                              identifier=ch.identifier)
-                if total > 1:
-                    name = ch.name + " " + str(idx + 1) + "/" + str(total)
-                else:
-                    name = ch.name
-                m3u8_str += entry + ", " + name + "\n" + stream + "\n"
+                total = len(ch.streams)
+                for idx, stream in enumerate(ch.streams):
+                    stream = str(ch.streams[0])
+                    if stream == "None":
+                        continue
+                    entry = entry_template.format(group=group,
+                                                  identifier=ch.identifier)
+                    if total > 1:
+                        name = ch.name + " " + str(idx + 1) + "/" + str(total)
+                    else:
+                        name = ch.name
+                    m3u8_str += entry + ", " + name + "\n" + stream + "\n"
+            except Exception as e:
+                print(e)
 
         m3u8_str += "#EXT-X-ENDLIST"
         return m3u8_str
