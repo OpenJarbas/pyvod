@@ -55,9 +55,6 @@ class Media:
         for s in self.streams:
             if s.status == StreamStatus.OK:
                 return True
-        for s in self.streams:
-            if s.status == StreamStatus.SLOW:
-                return True
         return False
 
     def __str__(self):
