@@ -1,15 +1,12 @@
-from pyvod.db import add_movie
 import requests
-from pprint import pprint
+from os.path import exists
 import bs4
 import internetarchive as ia
-
 from internetarchive import get_item
 from internetarchive import ArchiveSession
+from pyvod import Collection
 
 VALID_FORMATS = ['MPEG2', "Ogg Video", "512Kb MPEG4"]
-
-from os.path import exists
 
 if exists("seen.txt"):
     with open("seen.txt") as f:
@@ -94,8 +91,11 @@ collections = [
 
 for collection_name in collections:
     print(collection_name)
+    db_path = collection_name.lower().strip().replace(" ", "_") + ".jsondb"
+    VOD = Collection(collection_name, db_path=db_path)
+
     for movie in parse_collection(collection_name):
-        add_movie(movie, db_path="pyvod/res/" + collection_name + ".jsondb")
+        VOD.add_entry(movie)
 
         print(len(seen), movie["title"])
         # print(movie)

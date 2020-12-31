@@ -1,9 +1,11 @@
+import subprocess
+from os.path import join, exists
 import requests
 from requests.exceptions import Timeout
 from enum import IntEnum
-import youtube_dl
 from tempfile import gettempdir
-from os.path import join
+import youtube_dl
+import pafy
 
 
 class StreamStatus(IntEnum):
@@ -95,7 +97,8 @@ def parse_m3u8(m3, verify=False, verbose=False):
                         data[k] = val
                         k, val = new_k, None
             if "identifier" not in data:
-                data['identifier'] = data["name"].lower().strip().replace(" ", "_")
+                data['identifier'] = data["name"].lower().strip().replace(" ",
+                                                                          "_")
             movies.append(data)
 
     entries = {}
@@ -118,34 +121,143 @@ def parse_m3u8(m3, verify=False, verbose=False):
     return entries
 
 
-def ydl(url, verbose=False):
-    ydl_opts = {
-        "no_color": True,
-        'quiet': not verbose
-    }
+def ydl(url, name=None, download=False, to_mp3=True, output_folder=None,
+        verbose=False, audio=False):
+    if audio:
+        ydl_opts = {
+            "no_color": True,
+            'quiet': not verbose,
+            "requested_formats": "bestaudio[ext=m4a]"
+        }
+        # TODO proper format detection, meanwhile force mp3
+        to_mp3 = True
+        if to_mp3:
+            ydl_opts['postprocessors'] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }]
+    else:
+        ydl_opts = {
+            "no_color": True,
+            'quiet': not verbose
+        }
+    if download:
+        output_folder = output_folder or gettempdir()
+        name = name or "%(title)s"
+        ydl_opts['outtmpl'] = join(output_folder, name + '.%(ext)s')
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        result = ydl.extract_info(url,
-                                  download=False
-                                  # We just want to extract the info
-                                  )
-
+        result = ydl.extract_info(url, download=download)
         if 'entries' in result:
             # Can be a playlist or a list of videos
             video = result['entries'][0]
         else:
             # Just a video
             video = result
+        if "url" in video:
+            return video['url']
+        # TODO ensure correct format selection
+        streams = video["formats"]
+        stream = streams[-1]["url"]
+    if download:
+        name = video["title"]
+        if to_mp3:
+            ext = "mp3"
+        else:
+            ext = video["ext"]
+        return join(output_folder, name + '.' + ext)
+    return stream
 
-        return video['url']
 
+def url2stream(url, audio_only=False, download=False, to_mp3=True,
+               output_folder=None):
+    # skip direct streams
+    if audio_only:
+        exts = [".mp3", ".wav", ".ogg"]
+    else:
+        exts = [".mp3", ".mpeg", ".ogv", ".mp4", ".wav", ".ogg"]
+    for ext in exts:
+        if url.endswith(ext):
+            if audio_only and ext != ".mp3":
+                name = url.split("/")[-1]
+                output_folder = output_folder or gettempdir()
+                path = join(output_folder, name)
+                with open(path, 'wb') as f:
+                    f.write(requests.get(url).content)
+                return convert_to_m3(path, output_folder)
+            return url
 
-def url2stream(url):
     try:
-        stream = ydl(url)
-        if stream:
-            url = stream
-    except:
-        # specific implementations can be added here
+        if audio_only:
+            return get_audio_stream(url, download=download, to_mp3=to_mp3,
+                                    output_folder=output_folder)
+        return get_video_stream(url, download=download,
+                                output_folder=output_folder)
+    except Exception as e:
         pass
+        # specific implementations can be added here
     return url
+
+
+def get_youtube_audio_stream(url, name=None, download=False, to_mp3=True,
+                             output_folder=None):
+    stream = pafy.new(url).getbestaudio()
+    if download:
+        name = name or url.split("watch?v=")[-1].split("/")[-1]
+        output_folder = output_folder or gettempdir()
+        path = join(output_folder, name + "." + stream.extension)
+        if not exists(path):
+            stream.download(path)
+        if to_mp3:
+            mp3 = convert_to_m3(path, name, output_folder=output_folder)
+            if mp3:
+                return mp3
+        return path
+    return stream.url
+
+
+def get_youtube_video_stream(url, name=None, download=False,
+                             output_folder=None):
+    stream = pafy.new(url).streams[0]
+    if download:
+        name = name or url.split("watch?v=")[-1].split("/")[-1]
+        output_folder = output_folder or gettempdir()
+        path = join(output_folder, name + "." + stream.extension)
+        if not exists(path):
+            stream.download(path)
+        return path
+    return stream.url
+
+
+def get_audio_stream(url, download=False, to_mp3=True, output_folder=None):
+    if "youtube." in url or "youtu.be" in url:
+        return get_youtube_audio_stream(url, download=download, to_mp3=to_mp3,
+                                        output_folder=output_folder)
+    else:
+        return ydl(url, audio=True, download=download, to_mp3=to_mp3,
+                   output_folder=output_folder)
+
+
+def get_video_stream(url, download=False, output_folder=None):
+    if "youtube." in url or "youtu.be" in url:
+        return get_youtube_video_stream(url, download=download,
+                                        output_folder=output_folder)
+    else:
+        return ydl(url, audio=False, download=download,
+                   output_folder=output_folder)
+
+
+def convert_to_m3(path, name=None, output_folder=None):
+    name = name or path.split("/")[-1]
+    output_folder = output_folder or gettempdir()
+    mp3 = join(output_folder, name.replace(".mp3", "") + ".mp3")
+    if not exists(mp3):
+        # convert file to mp3
+        command = ["ffmpeg", "-n", "-i", path, "-acodec",
+                   "libmp3lame",
+                   "-ab", "128k", mp3]
+        subprocess.call(command)
+    if exists(mp3):
+        return mp3
+    return None
 

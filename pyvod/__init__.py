@@ -27,7 +27,8 @@ class Media:
         if "title" not in self.data and "name" in self.data:
             self.data["title"] = self.data.pop("name")
         self.name = str(self.data["title"]).strip()
-        self._streams = self.data.get("streams") or [self.data["stream"]]
+        self._streams = self.data.get("streams") or \
+                        [ self.data.get("stream") or self.data["url"]]
 
     @property
     def identifier(self):
@@ -38,13 +39,23 @@ class Media:
         return Media(**data)
 
     def as_json(self):
-        return self.data
+        return dict(self.data)
 
     @property
     def streams(self):
         streams = []
         for url in self._streams:
             url = url2stream(url)
+            if not url:
+                continue
+            streams.append(Stream(url))
+        return streams
+
+    @property
+    def audio_streams(self):
+        streams = []
+        for url in self._streams:
+            url = url2stream(url, audio_only=True)
             if not url:
                 continue
             streams.append(Stream(url))
@@ -69,7 +80,7 @@ class Collection:
         self.db_path = db_path or join(gettempdir(), name + ".jsondb")
         self.name = name
         self.logo = logo or join(dirname(__file__), "res",
-                                 "logo", "moviesandfilms.png")
+                                 "moviesandfilms.png")
 
     @property
     def m3u8(self):
@@ -105,29 +116,26 @@ class Collection:
         with open(path, "w") as f:
             f.write(self.m3u8)
 
-    def add_entry(self, data, replace=True, normalize=False):
+    def add_entry(self, data, replace=True, normalize=False, key="title"):
         if isinstance(data, Media):
             data = data.as_json()
 
-        title = data.get("title") or data.get("name")
+        title = data[key]
         assert title is not None
-        if "name" in data:
-            data.pop("name")
-        data["title"] = title
 
         # normalization
         if normalize:
-            for k in data:
-                if isinstance(data[k], list) and k != "streams":
-                    for idx, i in enumerate(data[k]):
+            for key in data:
+                if isinstance(data[key], list) and key != "streams":
+                    for idx, i in enumerate(data[key]):
                         if isinstance(i, str):
-                            data[k][idx] = i.lower()
-                elif isinstance(data[k], str):
-                    data[k] = data[k].lower()
+                            data[key][idx] = i.lower()
+                elif isinstance(data[key], str):
+                    data[key] = data[key].lower()
 
         with JsonDatabase(self.name, self.db_path) as db:
 
-            selected, item_id = self.match_entry(data)
+            selected, item_id = self.match_entry(data, key=key)
             if selected:
                 if replace:
                     print("replacing item in database")
@@ -136,63 +144,59 @@ class Collection:
                     print("merging items")
 
                     # merge fields
-                    for k in data:
-                        if k in selected and isinstance(selected[k], list):
-                            selected[k] += data[k]
+                    for key in data:
+                        if key in selected and isinstance(selected[key], list):
+                            selected[key] += data[key]
                             # remove duplicates
-                            selected[k] = list(set(selected[k]))
+                            selected[key] = list(set(selected[key]))
                         else:
-                            selected[k] = data[k]
+                            selected[key] = data[key]
 
                     db.update_item(item_id, selected)
                 return
             db.add_item(data)
 
-    def match_entry(self, data):
+    def match_entry(self, data, key="title"):
         if isinstance(data, Media):
             data = data.as_json()
-        with JsonDatabase(self.name, self.db_path) as db:
+        db = JsonDatabase(self.name, self.db_path)
+        # search by key/value pair
+        movies = db.search_by_value(key, data[key])
 
-            # search by key/value pair
-            movies = db.search_by_value("title", data["title"])
-
-            if len(movies):
-                selected = movies[0]
-                item_id = db.get_item_id(selected)
-                if item_id >= 0:
-                    return selected, item_id
+        if len(movies):
+            selected = movies[0]
+            item_id = db.get_item_id(selected)
+            if item_id >= 0:
+                return selected, item_id
         return None, -1
 
-    def replace_entry(self, data):
-        self.add_entry(data, replace=True)
+    def replace_entry(self, data, key="title"):
+        self.add_entry(data, replace=True, key=key)
 
-    def update_entry(self, data):
-        self.add_entry(data, replace=False)
+    def update_entry(self, data, key="title"):
+        self.add_entry(data, replace=False, key=key)
 
-    def remove_entry(self, data, normalize=False):
+    def remove_entry(self, data, normalize=False, key="title"):
         if isinstance(data, Media):
             data = data.as_json()
 
-        title = data.get("title") or data.get("name")
+        title = data.get(key)
         assert title is not None
-        if "name" in data:
-            data.pop("name")
-        data["title"] = title
 
         # normalization
         if normalize:
-            for k in data:
-                if isinstance(data[k], list) and k != "streams":
-                    for idx, i in enumerate(data[k]):
+            for key in data:
+                if isinstance(data[key], list) and key != "streams":
+                    for idx, i in enumerate(data[key]):
                         if isinstance(i, str):
-                            data[k][idx] = i.lower()
-                elif isinstance(data[k], str):
-                    data[k] = data[k].lower()
+                            data[key][idx] = i.lower()
+                elif isinstance(data[key], str):
+                    data[key] = data[key].lower()
 
         with JsonDatabase(self.name, self.db_path) as db:
 
             # search by key/value pair
-            movies = db.search_by_value("title", data["title"])
+            movies = db.search_by_value(key, data[key])
 
             if len(movies):
                 selected = movies[0]
@@ -202,17 +206,17 @@ class Collection:
                     db.remove_item(item_id)
 
     def print_collection(self):
-        with JsonDatabase(self.name, self.db_path) as db:
-            db.print()
+        JsonDatabase(self.name, self.db_path).print()
 
     @property
     def entries(self):
         entries = []
-        with JsonDatabase(self.name, self.db_path) as collection:
-            for ch in collection.db[self.name]:
-                if not ch.get("streams") and not ch.get("stream"):
-                    continue
-                entries.append(Media.from_json(ch))
+        collection = JsonDatabase(self.name, self.db_path)
+        for ch in collection.db[self.name]:
+            if not ch.get("streams") and not ch.get("stream") and not \
+                    ch.get("url"):
+                continue
+            entries.append(Media.from_json(ch))
         return entries
 
     @property
@@ -221,13 +225,12 @@ class Collection:
 
     @property
     def total_entries(self):
-        with JsonDatabase(self.name, self.db_path) as db:
-            return len(db)
+        return len(JsonDatabase(self.name, self.db_path))
 
-    def remove_bad_entries(self):
+    def remove_bad_entries(self, key="title"):
         for ch in self.entries:
             if not ch.alive:
-                self.remove_entry(ch)
+                self.remove_entry(ch, key=key)
                 print(ch.name, "DEAD")
 
     def search(self, query, max_res=5,

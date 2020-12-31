@@ -1,4 +1,5 @@
-from pyvod.collections import MovieTrailers, FeatureFilmsPicfixer, FeatureFilms
+from pyvod.channel_collections import MovieTrailers, FeatureFilmsPicfixer, \
+    FeatureFilms
 
 query = "grindhouse"
 
@@ -12,6 +13,6 @@ for movie, score in FeatureFilms.search(query):
     print(movie.data["tags"])
 
 query = "Frankenstein"
-print("\nSearching Movie Trailers for: ", query, "\n")
+print("\nSearching Media Trailers for: ", query, "\n")
 for movie, score in MovieTrailers.search(query):
     print(movie, score)

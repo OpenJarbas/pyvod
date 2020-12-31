@@ -1,8 +1,13 @@
-from pyvod.collections import Cinemocracy, SciFiHorror, FeatureFilms, FeatureFilmsPicfixer
+from pyvod import Collection
+from os.path import dirname, join
 
-# You can play the generated .m3u8 file in VLC or other player
+db = join(dirname(__file__), "sample_collections", "cinemocracy.jsondb")
+out = join(dirname(__file__), "m3u8", "Cinemocracy.m3u8")
+# NOTE name must match top level key in .jsondb file
+# a jsondb can contain more than 1 collection
+cinemocracy = Collection("cinemocracy", db_path=db)
 
-Cinemocracy.dump_m3u8("Cinemocracy.m3u8")
-SciFiHorror.dump_m3u8("ScifiHorror.m3u8")
-FeatureFilms.dump_m3u8("FeatureFilms.m3u8")
-FeatureFilmsPicfixer.dump_m3u8("FeatureFilmsPicfixer.m3u8")
+m38str = cinemocracy.m3u8
+
+cinemocracy.dump_m3u8(out)
+

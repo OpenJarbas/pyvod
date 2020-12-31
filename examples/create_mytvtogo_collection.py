@@ -1,6 +1,7 @@
 from pyvod import Collection
 
-MyTV = Collection("MyTvToGo", db_path="mytvtogo.jsondb")
+MyTVToGoMovies = Collection("MyTVToGoMovies",
+                            db_path="sample_collections/MyTVToGoMovies.jsondb")
 
 
 data = {
@@ -16,7 +17,7 @@ data = {
     "identifier": "mytvtogoBRAIN",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Manos: The Hands of Fate",
@@ -30,7 +31,7 @@ data = {
     "identifier": "mytvtogoMANOS",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Boneyard",
@@ -44,7 +45,7 @@ data = {
     "identifier": "mytvtogoBONEYARD",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Return of Dracula",
@@ -58,7 +59,7 @@ data = {
     "identifier": "mytvtogoDRACULA",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Night of the Living Dead",
@@ -72,7 +73,7 @@ data = {
     "identifier": "mytvtogoDEAD",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "My Dear Secretary",
@@ -86,7 +87,7 @@ data = {
     "identifier": "mytvtogoDEARSECRETARY",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Motel Hell",
@@ -100,7 +101,7 @@ data = {
     "identifier": "mytvtogoMOTELHELL",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "House On Haunted Hill",
@@ -114,7 +115,7 @@ data = {
     "identifier": "mytvtogoHOUSEHAUNTEDHILL",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Little Shop of Horrors",
@@ -128,7 +129,7 @@ data = {
     "identifier": "mytvtogoSHOPHORRORS",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Burning",
@@ -142,7 +143,7 @@ data = {
     "identifier": "mytvtogoBURNING",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Time Machine",
@@ -156,7 +157,7 @@ data = {
     "identifier": "mytvtogoTIMEMACHINE",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Deadly Companions",
@@ -170,7 +171,7 @@ data = {
     "identifier": "mytvtogoTHE_DEADLY_COMPANIONS",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "McLintock!",
@@ -184,7 +185,7 @@ data = {
     "identifier": "mytvtogoMC_LINTOCK",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Angel and the Badman",
@@ -198,7 +199,7 @@ data = {
     "identifier": "mytvtogoANGEL_AND_THE_BADMAN",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 
 data = {
@@ -213,7 +214,7 @@ data = {
     "identifier": "mytvtogoBEYOND_THE_LAW",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Savage Lagoon",
@@ -228,7 +229,7 @@ data = {
     "identifier": "mytvtogoSAVAGE_LAGOON",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Tammy And The Doctor",
@@ -242,7 +243,7 @@ data = {
     "identifier": "mytvtogoTAMMY_AND_THE_DOCTOR",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Royal Wedding",
@@ -256,7 +257,7 @@ data = {
     "identifier": "mytvtogoROYAL_WEDDING",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Vengeance Valley",
@@ -268,7 +269,7 @@ data = {
     "identifier": "mytvtogoVENGEANCE_VALLEY",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "Airborne",
@@ -280,7 +281,7 @@ data = {
     "identifier": "mytvtogoAIRBORNE",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "His Girl Friday",
@@ -294,7 +295,7 @@ data = {
     "identifier": "mytvtogoHIS_GIRL_FRIDAY",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "A Star Is Born",
@@ -308,7 +309,7 @@ data = {
     "identifier": "mytvtogoA_STAR_IS_BORN",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "WiseGirls",
@@ -322,7 +323,7 @@ data = {
     "identifier": "mytvtogoWISE_GIRLS",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Adventures of Tartu",
@@ -336,7 +337,7 @@ data = {
     "identifier": "mytvtogoTHE_ADVENTURES_OF_TARTU",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
 data = {
     "title": "The Last Man on Earth",
@@ -350,6 +351,6 @@ data = {
     "identifier": "mytvtogoTHE_LAST_MAN_ON_EARTH",
     "collection": ["MyTVToGo"]
 }
-MyTV.add_movie(data)
+MyTVToGoMovies.add_entry(data)
 
-MyTV.dump_m3u8("mytvtogoVOD.m3u8")
+MyTVToGoMovies.dump_m3u8("mytvtogoVOD.m3u8")

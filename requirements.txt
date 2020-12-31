@@ -1,4 +1,4 @@
-bs4
 requests
 json_database
 youtube-dl
+pafy
